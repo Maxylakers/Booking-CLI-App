@@ -1,6 +1,7 @@
 package main
 
 import (
+	"BookingApp/helper"
 	"fmt"
 	"strings"
 )
@@ -20,7 +21,7 @@ func main() {
 		firstName, lastName, email, userTickets := getUserInput()
 
 		// Call function to validate user input
-		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, email, userTickets)
+		isValidName, isValidEmail, isValidTicketNumber := helper.ValidateUserInput(firstName, lastName, email, userTickets, remainingTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 			// Call function bookTicket
