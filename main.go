@@ -2,14 +2,20 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 const conferenceTickets = 50
 
 var conferenceName = "Max Conference"
 var remainingTickets uint = 50
-var bookings = []string{}
+var bookings = make([]UserData, 0)
+
+type UserData struct {
+	firstName       string
+	lastName        string
+	email           string
+	numberOfTickets uint
+}
 
 func main() {
 
@@ -27,7 +33,7 @@ func main() {
 			bookTicket(userTickets, firstName, lastName, email)
 
 			// Call Function Print first name
-			firstNames := getFirstName(bookings)
+			firstNames := getFirstName()
 			fmt.Printf("The first names of all bookings are:  %v\n", firstNames)
 
 			if remainingTickets == 0 {
@@ -58,13 +64,14 @@ func greetUsers() {
 	fmt.Println("Get Your Tickets Here Now To Attend")
 }
 
-func getFirstName(bookings []string) []string {
+func getFirstName() []string {
 	// To use the for each statement, we need the "index" and the element declared. But since we are not using the index variable in the program, we will replace it with an "_"
 	firstNames := []string{}
 	for _, booking := range bookings {
 		// We will use the strings.Fields builtin function to seperate each element in booking with whitespaces
-		names := strings.Fields(booking)
-		firstNames = append(firstNames, names[0])
+		// names := strings.Fields(booking)
+		//Now we are changing the initial to a Map
+		firstNames = append(firstNames, booking.firstName)
 	}
 
 	return firstNames
@@ -94,8 +101,26 @@ func getUserInput() (string, string, string, uint) {
 func bookTicket(userTickets uint, firstName string, lastName string, email string) {
 	var remainingTickets = remainingTickets - userTickets
 
+	// Replacing the Map block below with struct
+
+	var userData = UserData{
+		firstName:       firstName,
+		lastName:        lastName,
+		email:           email,
+		numberOfTickets: userTickets,
+	}
+
+	//Create map for user data
+
+	// var userData = make(map[string]string)
+	// userData["firstName"] = firstName
+	// userData["lastName"] = lastName
+	// userData["email"] = email
+	// userData["numberOfTickest"] = strconv.FormatUint(uint64(userTickets), 10)
+
 	// bookings[0] = firstName + " " + lastName
-	bookings = append(bookings, firstName+" "+lastName)
+	bookings = append(bookings, userData)
+	fmt.Printf("The List of bookings is: %v\n", bookings)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("We now have: %v tickets remaining for the %v\n", remainingTickets, conferenceName)
