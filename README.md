@@ -9,10 +9,17 @@ This application is a simple tickets booking application to be ran on CLI.
 - Further validates the collected data against provided conditions.
 
 - If the data passes validation, it gets processed and stored in a slice. Also it returns the information below to user:
----Thank you *username* for booking *number-of-tickets* tickets. You will receive a confirmation email at       ---*user-email*
----We now have: *number-of-remaining-tickets* tickets remaining for the Max Conference
----The first names of all bookings are:  [*username*]
+
+---Thank you *username* for booking *number-of-tickets* tickets. You will receive a confirmation email at       *user-email* 
+
+We now have: *number-of-remaining-tickets* tickets remaining for the Max Conference
+
+The first names of all bookings are:  [*username*]
 
 
 - Proceeded to isolate Functions into packages so they can be ran using the:
 go run . (to run all the files in the project, using the main.go at the entry point file)
+
+- Simulate the tickets being sent to the users with a delay of 30 seconds.
+
+- Ultimately used the go routine to make the application concurrent while sending the ticket is being simulated, thereby, not leaving our code blocked for the process to complete. 
