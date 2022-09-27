@@ -24,4 +24,4 @@ go run . (to run all the files in the project, using the main.go at the entry po
 
 - Ultimately used the go routine to make the application concurrent while sending the ticket is being simulated, thereby, not leaving our code blocked for the process to complete. 
 
-- Proceeded to synchronize Go routines, such that when the main program exist, and a green thread (a high level abstraction of a regular CPU thread) is still running, the application waits using waitGroups for the green threads to complete its task.
+- Proceeded to synchronize Go routines, such that when the main completes, and a green thread (a high level abstraction of a regular CPU thread) is still running, the application waits using waitGroups for the green threads to complete its task(s) before exiting.
